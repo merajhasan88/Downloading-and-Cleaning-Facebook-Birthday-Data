@@ -1,0 +1,29 @@
+---
+title: "Cleaning Facebook Birthday Data"
+author: "Meraj Hasan"
+date: "March 17, 2018"
+output: html_document
+---
+
+**reading own facebook birthdays data from a file downloaded from google calendar and duly converted to csv format within excel
+  bdays <- read.csv('bdays.csv')
+
+**removing the first few rows of unwanted data
+  
+  bdays <- bdays[33:647,]
+  
+**since the required birth dates of friend contacts lies after every 15 rows we need to access only those rows and not the rest. So we generate the indices first  
+  newvar <- seq(1,615,by=15)
+  
+**accessing only the required rows  
+  bdays <- bdays[(newvar)]
+  
+**looking at the data we see that from the birthdate the month and day can be easily extracted as data from 24th to 27th character  
+  mday <-substring(bdays,24,25)
+  days <-substring(bdays,26,27)
+  
+**to be analyzed however the data needs to eb converted from chr data type to num  
+  mday <- as.numeric(mday)
+  days <- as.numeric(days)
+  
+**have fun!
